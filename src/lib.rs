@@ -211,7 +211,7 @@ impl<R : std::io::Read, W : std::io::Write> AudioDevice<R, W>
             else if state_var == 0b11 { self.buffer.channels = (state_data as u32) + 1 }
             if len == 1 { continue; }
             for index in 1..len { unsafe { *self.buffer.data.offset(index as isize) = buffer[index]; } }
-            std::thread::sleep(std::time::Duration::from_secs_f64(1.0 / self.sample_rate as f64));
+            std::thread::sleep(std::time::Duration::from_secs_f64(self.buffer.buffer_size as f64 / self.sample_rate as f64));
         }
     }
     pub fn write(&mut self)
@@ -221,7 +221,7 @@ impl<R : std::io::Read, W : std::io::Write> AudioDevice<R, W>
         while self.state
         {
             self.inner_write(count, 0);
-            std::thread::sleep(std::time::Duration::from_secs_f64(1.0 / self.sample_rate as f64));
+            std::thread::sleep(std::time::Duration::from_secs_f64(self.buffer.buffer_size as f64 / self.sample_rate as f64));
             count += 1;
         }
     }
