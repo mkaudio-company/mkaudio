@@ -142,7 +142,7 @@ impl Drop for AudioBuffer
     }
 }
 
-// Audio device for various reader and writer type.
+/// Audio device for various reader and writer type.
 pub struct AudioDevice<R : std::io::Read, W : std::io::Write>
 {
     name : String,
@@ -154,7 +154,7 @@ pub struct AudioDevice<R : std::io::Read, W : std::io::Write>
 }
 impl<R : std::io::Read, W : std::io::Write> AudioDevice<R, W>
 {
-    // Create an AudioDevice.
+    /// Create an AudioDevice.
     pub fn init(name : &str, reader : R, writer : W) -> Self
     {
         Self
@@ -167,11 +167,11 @@ impl<R : std::io::Read, W : std::io::Write> AudioDevice<R, W>
             writer: std::io::BufWriter::new(writer),
         }
     }
-    // Get name of the device.
+    /// Get name of the device.
     pub fn name(&self) -> String { self.name.clone() }
-    // Get sample rate of the device.
+    /// Get sample rate of the device.
     pub fn get_sample_rate(&self) -> u32 { self.sample_rate }
-    // Set sample rate of the device.
+    /// Set sample rate of the device.
     pub fn set_sample_rate(&mut self, sample_rate : u32)
     {
         if sample_rate % 22050 == 0
@@ -190,17 +190,17 @@ impl<R : std::io::Read, W : std::io::Write> AudioDevice<R, W>
         }
         println!("Invalid sample rate!");
     }
-    // Get buffer size of the input.
+    /// Get buffer size of the input.
     pub fn get_in_buffer_size(&self) -> u32 { self.in_buffer.buffer_size }
-    // Get buffer size of the output.
+    /// Get buffer size of the output.
     pub fn get_out_buffer_size(&self) -> u32 { self.out_buffer.buffer_size }
-    // Get channel count of the input.
+    /// Get channel count of the input.
     pub fn get_in_channels(&self) -> u32 { self.in_buffer.channels }
-    // Get channel count of the output.
+    /// Get channel count of the output.
     pub fn get_out_channels(&self) -> u32 { self.out_buffer.channels }
-    // Get bit depth of the input.
+    /// Get bit depth of the input.
     pub fn get_in_bit_depth(&self) -> u32 { self.in_buffer.bit_depth }
-    // Get bit depth of the output.
+    /// Get bit depth of the output.
     pub fn get_out_bit_depth(&self) -> u32 { self.out_buffer.bit_depth }
     fn read(&mut self)
     {
@@ -235,7 +235,7 @@ impl<R : std::io::Read, W : std::io::Write> AudioDevice<R, W>
         let _ = std::io::Write::write(&mut self.writer, &data);
         self.out_buffer.clear();
     }
-    // Play until state is false.
+    /// Play until state is false.
     pub fn play(&mut self, state : &bool)
     {
         while *state
