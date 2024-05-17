@@ -1,7 +1,16 @@
 [package]
 name = "mkaudio"
+authors = ["Minjae Kim <minjaekim@mkaudio.company>"]
+description = "MKAudio is a new cross platform low-level audio API written in Rust"
+license = "MIT OR Apache-2.0"
 version = "0.1.0"
 edition = "2021"
+documentation = "https://docs.rs/mkaudio"
+readme = "README.md"
+homepage = "https://github.com/mkaudio-company/mkaudio"
+repository = "https://github.com/mkaudio-company/mkaudio"
+keywords = ["audio", "api", "audio-api"]
+categories = ["audio", "api", "audio-api"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
